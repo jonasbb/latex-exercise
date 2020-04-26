@@ -347,3 +347,9 @@
 \if@prefix
   \renewcommand{\thetask}{\thesheet.\arabic{task}}
 \fi
+
+% Disable the wide space after a dot
+\AtBeginDocument{
+  \let\nonfrenchspacing=\frenchspacing
+  \frenchspacing
+}
