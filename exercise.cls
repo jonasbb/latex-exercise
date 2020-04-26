@@ -28,16 +28,17 @@
 % set type area
 \RequirePackage[paper=a4paper,
                 left=2.5cm,
-                right=4cm,
+                right=2.5cm,
                 top=4cm,
                 marginparsep=1cm,
                 marginparwidth=3cm,
                 bottom=2cm,
-                headsep=1.5cm,
-                footskip=1cm]{geometry}
+                headsep=.5cm,
+                footskip=1cm,
+                head=33pt]{geometry}
 
 % headings witout numbers
-\RequirePackage{scrpage2}
+\RequirePackage[headsepline=0.2pt]{scrlayer-scrpage}
 \KOMAoption{headings}{normal}
 \setcounter{secnumdepth}{0}
 
@@ -76,7 +77,7 @@
 \pagestyle{scrheadings}
 \clearscrheadfoot
 \automark{section}
-\newcommand{\setgroup}[1] {\ihead{#1}}
+\newcommand{\setgroup}[1] {\ohead{#1}}
 
 \newcommand{\addstudent}[2][]{%
   \scr@ifundefinedorrelax{@students@value}{%
@@ -88,16 +89,16 @@
     \expandafter\def\expandafter\@students@pdf\expandafter{%
       \@students@pdf{}, #2}}%
   \hypersetup{pdfauthor={\@students@pdf}}%
-  \ohead{\itshape \@students@value}}
+  \ihead{{\@students@value}}}
   
 \newcommand{\settitle}[2][\@sheettext] {%
   \hypersetup{pdftitle={#2},pdfsubject={#1}}%
   \chead{\large~\\\vskip-0.9em\textbf{#2}\\\vskip0.1em \textcolor{maincolor}{#1}}}
 
 \RequirePackage{zref-totpages}
-\ofoot{%
+\cfoot*{%
   \ifnum\ztotpages>1% We know the total number of pages and it is more than one --> page numbers! 
-    \raisebox{3pt}{\arabic{page}}{\LARGE/}\raisebox{-3pt}{\ztotpages}%
+    {\arabic{page}~/~\ztotpages}%
   \else%
     \ifnum\ztotpages=1% There is only one page in total --> no page numbers!
       %
@@ -108,12 +109,8 @@
 }
 
 % layout of head and foot
-\setheadtopline{1pt}
-\setheadsepline{0.2pt}
-\setfootwidth{textwithmarginpar}
 \setkomafont{pageheadfoot}{\small\sffamily}
-\setkomafont{pagefoot}{\large\sffamily}
-\setkomafont{headtopline}{\color{maincolor}}
+\setkomafont{pagefoot}{\sffamily}
 
 % add maincolor to section layout
 \addtokomafont{section}{\color{maincolor}}
@@ -134,7 +131,6 @@
 \RequirePackage{hyperref}
 \hypersetup{breaklinks=true,
             pdfborder={0 0 0},
-            ngerman,
             pdfhighlight={/N}}
 \RequirePackage[all]{hypcap}
 
