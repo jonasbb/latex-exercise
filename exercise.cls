@@ -119,6 +119,8 @@
 \RequirePackage[table]{xcolor}
 % define color of university of luebeck
 \xdefinecolor{uni-luebeck}{RGB}{0, 120, 140}
+\xdefinecolor{cispa}{RGB}{0, 156, 196}
+\xdefinecolor{cispa-dark}{RGB}{0, 128, 161}
 \colorlet{maincolor}{orange}
 
 % zebra tables
@@ -148,15 +150,19 @@
 
 % listings
 \RequirePackage{listings}
+\definecolor{darkgreen}{rgb}{0,0.3,0}
+\definecolor{darkorange}{rgb}{0.71,0.4,0.11}
 \lstset{%
   basicstyle=\ttfamily,%
   keywordstyle=\color{maincolor}\bfseries,%
-  identifierstyle=\color{blue},%
+  identifierstyle=\color{darkorange},%
+  commentstyle=\color{black!80},
+  stringstyle=\color{darkgreen},
   numbers=left,%
   numberstyle=\footnotesize,%
   frame=lines,%
   captionpos={b},% set caption pos to bottom
-  backgroundcolor=\color{maincolor!10},%
+  backgroundcolor=\color{maincolor!5},%
   rulecolor=\color{maincolor!70},%
   framerule=1pt,%
   showstringspaces=false,%
