@@ -174,6 +174,19 @@
            {ü}{{\"u}}1
            {ß}{{\ss}}1
 }
+% Define x86/x64 Assembler
+\lstdefinelanguage
+   [x64]{Assembler}     % add a "x64" dialect of Assembler
+   [x86masm]{Assembler} % based on the "x86masm" dialect
+   % with these extra keywords:
+   {morekeywords={CDQE,CQO,CMPSQ,CMPXCHG16B,JRCXZ,LODSQ,MOVSXD, %
+                  POPFQ,PUSHFQ,SCASQ,STOSQ,IRETQ,RDTSCP,SWAPGS, %
+                  CMOVE, .text, .data, %
+                  rax,rdx,rcx,rbx,rsi,rdi,rsp,rbp, %
+                  r8,r8d,r8w,r8b,r9,r9d,r9w,r9b, %
+                  r10,r10d,r10w,r10b,r11,r11d,r11w,r11b,
+                  r12,r12d,r12w,r12b,r13,r13d,r13w,r13b %
+                  }}
 
 % nice tick
 \newcommand{\tick}{\checkmark}
