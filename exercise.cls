@@ -90,19 +90,19 @@
       \@students@pdf{}, #2}}%
   \hypersetup{pdfauthor={\@students@pdf}}%
   \ihead{{\@students@value}}}
-  
+
 \newcommand{\settitle}[2][\@sheettext] {%
   \hypersetup{pdftitle={#2},pdfsubject={#1}}%
   \chead{\large~\\\vskip-0.9em\textbf{#2}\\\vskip0.1em \textcolor{maincolor}{#1}}}
 
 \RequirePackage{zref-totpages}
 \cfoot*{%
-  \ifnum\ztotpages>1% We know the total number of pages and it is more than one --> page numbers! 
+  \ifnum\ztotpages>1% We know the total number of pages and it is more than one --> page numbers!
     {\arabic{page}~/~\ztotpages}%
   \else%
     \ifnum\ztotpages=1% There is only one page in total --> no page numbers!
       %
-    \else% 
+    \else%
       \arabic{page}% We do not know the total number of pages yet --> recompile needed
     \fi%
   \fi%
@@ -235,7 +235,7 @@
   \setvarenum\begin{enumerate}}{\end{enumerate}}
 \newenvironment{varcompactenum}{%
   \setvarenum\begin{compactenum}}{\end{compactenum}}
-  
+
 % redefine existing list environments to color every item in the maincolor
 \newcommand{\ifempty}[3]{\ifthenelse{\equal{#1}{}}{#2}{#3}}
 \newcommand{\@oldenumerate}{}
@@ -385,3 +385,37 @@
   \@printlist{\@multiplechoicesolutionlist}
   \global\def\@multiplechoicesolutionlist{}
 }
+
+% Definitions for the solution boxes:
+\RequirePackage{mdframed}
+\RequirePackage{comment}
+
+\includecomment{solution}
+\includecomment{notinsolution}
+
+\begin{solution}
+\specialcomment{solutionbox}
+  {\begin{mdframed}[
+    backgroundcolor=maincolor!5,
+    leftline=false,
+    rightline=false,
+    linecolor=maincolor!70,
+    linewidth=1pt,
+  ]{\textcolor{maincolor}{\textbf{\textsf{Solution:}}}~}}
+  {\end{mdframed}}
+\end{solution}
+
+\begin{notinsolution}
+\specialcomment{notinsolutionbox} {} {}
+\end{notinsolution}
+
+% By default we include the solutions.
+% Command used for excluding the solutions.
+\newcommand{\withoutsolutions}{\excludecomment{solutionbox}
+  \renewcommand{\nosolutionspagebreak}{\pagebreak}
+  \renewcommand{\solutionspagebreak}{}
+  \renewcommand{\correctitem}[1][]{\item }
+}
+
+\newcommand{\nosolutionspagebreak}{}
+\newcommand{\solutionspagebreak}{\pagebreak}
