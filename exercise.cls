@@ -353,3 +353,35 @@
   \let\nonfrenchspacing=\frenchspacing
   \frenchspacing
 }
+
+% Implement some support for multiple choice exercises
+%
+% This adds the main command \correctitem.
+% It can be used instead of \item and marks the correct solution for a multiple choice exercise.
+% It takes an optional argument which is printed behind the bullet point.
+%
+% The command \multiplechoicesolutions prints the solutions to the previous questions based on the \correctitem command
+
+\RequirePackage{etoolbox}
+
+\def\@multiplechoicesolutionlist{}
+\newcommand{\@printlist}[2][,]{{% Print list
+  % % http://tex.stackexchange.com/a/89187/5764
+  % \def\listsep{\def\listsep{#1}}% Delayed execution of list separator
+  % \renewcommand{\do}[1]{\listsep`##1'}%
+
+  \renewcommand*{\do}[1]{\item ##1}%
+  \begin{itemize}
+    \dolistloop\@multiplechoicesolutionlist
+  \end{itemize}
+}}
+
+\newcommand{\correctitem}[1][]{%
+  \item%
+  \listxadd{\@multiplechoicesolutionlist}{\alph{enumi}) \number\value{enumii}~#1}%
+  \textcolor{maincolor}{\tick~#1}%
+}
+\newcommand{\multiplechoicesolutions}{
+  \@printlist{\@multiplechoicesolutionlist}
+  \global\def\@multiplechoicesolutionlist{}
+}
